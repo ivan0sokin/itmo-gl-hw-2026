@@ -35,11 +35,11 @@ std::string readFile(const std::filesystem::path& path) {
     }
 
     const std::string contents{std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>()};
-    
+
     if (file.bad()) {
         throw std::runtime_error("cannot read asset: " + path.string());
     }
-    
+
     return contents;
 }
 
