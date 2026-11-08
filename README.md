@@ -1,5 +1,17 @@
 ![build_cmake_status](https://github.com/sadads1337/mse-gl-hw-template/actions/workflows/build_cmake.yml/badge.svg)
 
+# Запуск
+
+Я немного модифицировал шаблон и избавился от Qt.
+
+Пожалуйста, используйте CMake >= 3.11 (чтобы работал `FetchContent_*`).
+
+Для сборки из корня проекта напишите:
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build
+```
+
 # ITMO OpenGL homework template 2026
 
 This project is based on [mse-gl-hw-template](https://github.com/sadads1337/mse-gl-hw-template).

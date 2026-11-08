@@ -2,43 +2,40 @@
 
 #include "openglwidget.h"
 
-#include <QElapsedTimer>
-#include <QOpenGLBuffer>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLTexture>
-#include <QOpenGLVertexArrayObject>
-#include <QWindow>
+#include <glad/glad.h>
+#include <glm/mat4x4.hpp>
 
-class Window : public OpenGLWidget
-{
-    Q_OBJECT
+#include <chrono>
+#include <cstddef>
 
+class Window : public OpenGLWidget {
 public:
-    Window();
-    ~Window();
+    Window() = default;
+    ~Window() override;
 
     void onInit() override;
     void onRender() override;
-    void onResize(size_t width, size_t height) override;
+    void onResize(std::size_t width, std::size_t height) override;
+    void onGui() override;
 
 private:
-    QElapsedTimer timer_;
+    std::chrono::steady_clock::time_point timer_;
     GLint colorUniform_ = -1;
-    float hue_ = 0;
+    float hue_ = 0.0f;
 
     GLint mvpUniform_ = -1;
 
-    QMatrix4x4 model_;
-    QMatrix4x4 view_;
-    QMatrix4x4 projection_;
+    glm::mat4 model_{1.0f};
+    glm::mat4 view_{1.0f};
+    glm::mat4 projection_{1.0f};
 
-    QOpenGLBuffer vbo_{QOpenGLBuffer::Type::VertexBuffer};
-    QOpenGLBuffer ibo_{QOpenGLBuffer::Type::IndexBuffer};
-    QOpenGLVertexArrayObject vao_;
+    GLuint vbo_ = 0;
+    GLuint ibo_ = 0;
+    GLuint vao_ = 0;
 
-    std::unique_ptr<QOpenGLTexture> texture_;
-    std::unique_ptr<QOpenGLShaderProgram> program_;
+    GLuint texture_ = 0;
+    GLuint program_ = 0;
 
     bool animated_ = true;
-    bool сolorAnimated_ = animated_;
+    bool colorAnimated_ = true;
 };
